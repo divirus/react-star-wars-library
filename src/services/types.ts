@@ -8,7 +8,7 @@ export interface IBase {
 export interface IPeopleSliceState {
   count: number;
   next: string;
-  previous: string;
+  previous: string | null;
   results: ICharacter[];
 }
 

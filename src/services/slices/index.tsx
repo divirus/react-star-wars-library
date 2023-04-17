@@ -1,10 +1,9 @@
 import { combineReducers } from '@reduxjs/toolkit'
 
-import { itemsSlice } from "./items";
+import { peopleSlice } from './people';
 
 const rootReducer = combineReducers(
   {
-    items: itemsSlice.reducer,
     people: peopleSlice.reducer
   }
 )
