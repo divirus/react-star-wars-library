@@ -1,26 +1,26 @@
 import { Dispatch } from 'react';
 import { createSlice } from '@reduxjs/toolkit';
 
-import { IPeopleSliceState } from '../types';
+import { IPeopleData, IPeopleSliceState } from '../types';
 import { getPeopleData } from '../api';
 
 export const peopleInitialState: IPeopleSliceState = {
-  count: 0,
-  next: '',
-  previous: null,
-  results: []
+  data: [],
+  dataLoadPending: false,
+  dataLoadSuccess: false,
+  dataLoadError: false,
 }
 
 export const getPeople = () => {
-  return ((dispatch : Dispatch<any>) => {
+  return ((dispatch: Dispatch<any>) => {
     dispatch(peopleSlice.actions.request());
 
     getPeopleData()
-      .then((response: {data: IPeopleSliceState}) => {
-        dispatch(peopleSlice.actions.success(response.data));
+      .then((response: IPeopleData) => {
+        dispatch(peopleSlice.actions.success(response.results));
       })
       .catch((error: Error) => {
-        console.log(error);
+        console.error(error);
         dispatch(peopleSlice.actions.failed());
       })
   })
@@ -31,14 +31,20 @@ export const peopleSlice = createSlice({
   initialState: peopleInitialState,
   reducers: {
     request(state) {
-    //   state.itemsPendingStatus = 'loading';
+      state.dataLoadPending = true;
+      state.dataLoadSuccess = false;
+      state.dataLoadError = false;
     },
     failed(state) {
-    //   state.itemsPendingStatus = 'error';
+      state.dataLoadPending = false;
+      state.dataLoadSuccess = false;
+      state.dataLoadError = true;
     },
     success(state, action) {
-    //   state.itemsPendingStatus = 'success';
-      state.results = action.payload;
+      state.dataLoadPending = false;
+      state.dataLoadSuccess = true;
+      state.dataLoadError = false;
+      state.data = action.payload;
     },
 }
 }) 

@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { HashRouter } from 'react-router-dom';
 
-import './index.css';
+import './index.module.scss';
 import App from './components/app/app';
 import { store } from './services/store';
 import reportWebVitals from './reportWebVitals';

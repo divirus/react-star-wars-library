@@ -6,6 +6,13 @@ export interface IBase {
 }
 
 export interface IPeopleSliceState {
+  data: ICharacter[],
+  dataLoadPending: boolean;
+  dataLoadSuccess: boolean;
+  dataLoadError: boolean;
+}
+
+export interface IPeopleData {
   count: number;
   next: string;
   previous: string | null;

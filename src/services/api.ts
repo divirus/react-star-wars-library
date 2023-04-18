@@ -11,5 +11,5 @@ const BASE_URL = 'https://swapi.dev/api/';
 const PEOPLE_URL = BASE_URL + 'people/';
 
 export const getPeopleData = async () => {
-  return await request (PEOPLE_URL);
+  return await request(PEOPLE_URL);
 }
